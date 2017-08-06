@@ -7,6 +7,7 @@ from tkinter import *
 #import  tkinter as tk
 from tkinter import ttk
 import  threading
+
 # #链接数据库 常熟正式库3.0
 # conn1 = pyodbc.connect(r'DRIVER={SQL Server};SERVER=10.226.35.103;DATABASE=IMES3;UID=imes3_user;PWD=yfpoimes31024')
 # #增加数据库游标
