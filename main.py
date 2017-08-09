@@ -18,7 +18,7 @@ if __name__=="__main__":
     root.x1y1.grid(row=0, column=0,padx=10,pady=10)
     root.x1y2 = Button(root,text='全局条码查询',command=x1y2.gui)
     root.x1y2.grid(row=0, column=2)
-    root.x2y1 = Button(root,text='解除RK', width=10)
+    root.x2y1 = Button(root,text='换货补防错码', width=10)
     root.x2y1.grid(row=2, column=0)
     root.x2y2 = Button(root,text='解除绑定', width=10,command=x2y2.gui)
     root.x2y2.grid(row=2, column=2,padx=10,pady=10)

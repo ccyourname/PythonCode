@@ -11,10 +11,10 @@ from tkinter import *
 # print(g(2))
 # print(list(filter(lambda x:x%2,range(20))))#筛选器filter 排除提偶就
 # print(list(map(lambda x:x*2,range(20))))  #map 将第二值代入第一值后处理
-sql=("scan bar"
-     "code "
-     "log %s" % 'mes3')
-print(sql)
+# sql=("scan bar"
+#      "code "
+#      "log %s" % 'mes3')
+# print(sql)
 
 # from dbcfg import *
 # class ca:
@@ -37,5 +37,10 @@ print(sql)
 #     btn=Button(tk1,text="弹窗",command=cc.gui)
 #     btn.grid(row=1,column=1)
 #     tk1.mainloop()
-
+tk=Tk()
+e1=Entry(tk)
+e1.grid(row=0,column=0)
+e2=Entry(tk)
+e2.grid(row=1,column=0)
+tk.mainloop()
 
