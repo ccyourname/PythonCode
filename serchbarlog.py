@@ -10,7 +10,7 @@ class Show():
     def gui(self):
 
         self.win=Tk()
-        self.win.title="报废判定"
+        self.win.title("报废判定")
         #self.win.wm_attributes("-topmost", 1)
         #self.tk.title("报废判定")
         Label(self.win,text='条码：').grid(row=0, column=0)
@@ -58,6 +58,8 @@ if __name__=="__main__":
     # show.gui(tk)
     #tk.protocol("WM_DELETE_WINDOW", show.colsewin(tk))  # 窗口关闭触发事件
     mainloop()
+    cursor1.close()
+    conn1.close()
 
 
 
