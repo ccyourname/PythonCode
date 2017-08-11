@@ -73,7 +73,7 @@ class barscan:
             except:
                 pass
         else:
-            dbcfg.cursor1.execute("SELECT a.Barcode , a.NewPartNo,c.PartDesc,a.NewQualityStatus,b.ScanSiteName,a.ActionCode ,a.createtime FROM dbo.MFG_BarcodeScanLog a INNER JOIN dbo.MFG_ScanSite b ON a.ScanSiteCode =b.ScanSiteCode LEFT JOIN dbo.MFG_PartDetail c ON a.NewPartNo =c.PartNo  WHERE a.Barcode = '%s' and a.ScanSiteCode != 'StdStockTaking' and c.FactoryCode='1140' order by a.id" % self.barcode)
+            dbcfg.cursor1.execute("SELECT a.Barcode , a.NewPartNo,c.PartDesc,a.NewQualityStatus,b.ScanSiteName,d.actionname ,e.username,a.createtime FROM dbo.MFG_BarcodeScanLog a INNER JOIN dbo.MFG_ScanSite b ON a.ScanSiteCode =b.ScanSiteCode LEFT JOIN dbo.MFG_PartDetail c ON a.NewPartNo =c.PartNo left join dbo.MFG_ScanAction d on d.actioncode=a.actioncode left join dbo.SYS_User e on a.CreateUserAccount=e.useraccount  WHERE a.Barcode = '%s' and a.ScanSiteCode != 'StdStockTaking' and c.FactoryCode='1140' order by a.id" % self.barcode)
             getbar1 = dbcfg.cursor1.fetchall()
             for bar1 in getbar1:
                 if bar1[3] == '1':

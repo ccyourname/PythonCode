@@ -53,7 +53,7 @@ class LED():#tkinter Ö÷´°¿Ú
         self.errwin.l1.grid(row=4,column=0)
         self.errwin.l2=Listbox(self.errwin)
         self.errwin.l2.grid(row=4,column=1)
-        self.errwin.l3=Listbox(self.errwin,width=30)
+        self.errwin.l3=Listbox(self.errwin,width=60)
         self.errwin.l3.grid(row=4,column=2,columnspan=10)
         self.errwin.bt1=Button(self.errwin,text="²éÑ¯",command=self.checkdata)
         self.errwin.bt1.grid(row=1,column=2)

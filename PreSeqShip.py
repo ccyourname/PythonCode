@@ -203,7 +203,11 @@ def display(inc): #ΩÁ√Êœ‘ æ
                 cursor.execute("SELECT   SerialNo = MAX(SerialNo) FROM  dbo.LGS_JISOrderInterim WHERE Category3 = 'fb' AND IsOrdered ='1' GROUP BY VehicleCode ORDER BY SerialNo DESC ") 
                 getno=cursor.fetchall()
                 for serialno in getno:
-                        cursor.execute("SELECT a.CustOrderNo ,a.VinCode,b.Description ,a.PartFamily ,a.CarNo ,a.ExpectedArrivalTime ,a.SerialNo FROM  dbo.LGS_JISOrderInterim  a  INNER JOIN dbo.LGS_CustStdOrdMstr b ON a.StdOrdCfg = b.StdOrdCfg	 WHERE   a.Category3 = 'fb' AND a.IsOrdered ='1' AND a.SerialNo = '%d' " % serialno[0] )
+                        cursor.execute("SELECT a.CustOrderNo ,a.VinCode,b.Description ,a.PartFamily ,a.CarNo ,"
+                                       "a.ExpectedArrivalTime ,a.SerialNo FROM  dbo.LGS_JISOrderInterim  a "
+                                       " INNER JOIN dbo.LGS_CustStdOrdMstr b ON a.StdOrdCfg = b.StdOrdCfg	"
+                                       " WHERE   a.Category3 = 'fb'  and a.carno !='00000000000000000000' "
+                                       "AND a.IsOrdered ='1' AND a.SerialNo = '%d' " % serialno[0] )
                         gethist=cursor.fetchall()
                         for hist in gethist:
                                 aa1=(e11.insert(0,hist[6]))
