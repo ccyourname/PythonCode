@@ -37,7 +37,7 @@ class localbar:
             self.e2.insert(END,data)
             if a=="x":
                 self.e2.itemconfig(0, bg="red")
-        pass
+
     def gui(self):
         "TK¿ò¼Ü"
         self.master=Tk()

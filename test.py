@@ -1,37 +1,69 @@
 # #coding=gbk
 # #__author__ ="谢飞"
-# 文件分割
-def savefile(boy,gril,n):
-     a_file_name="d://a"+str(n)+".txt"
-     b_file_name = "d://b" + str(n) + ".txt"
-     a_file=open(a_file_name,"w")
-     b_file=open(b_file_name,"w")
-     a_file.writelines(boy)
-     b_file.writelines(gril)
+# 网页链接
+import urllib.request
+import json
+import urllib.parse
+#Request URL
+url = "http://fanyi.youdao.com/translate?smartresult=dict&smartresult=rule&sessionFrom="
+data ={}
+i = input("请输入要翻译的文字：")
+# From Data 全部属性
+data["i"]=i
+data["from"]="AUTO"
+data["to"]="AUTO"
+data["smartresult"]="dict"
+data["client"]="fanyideskweb"
+data["salt"]="502865709143"
+data["sign"]="e7b725d55dd02ab7b3a17c44170950ad"
+data["doctype"]="json"
+data["version"]="2.1"
+data["keyfrom"]="fanyi.web"
+data["action"]="FY_BY_CLlCKBUTTON"
+data["typoResult"]="true"
+#转码
+data =urllib.parse.urlencode(data).encode("utf-8")
+#打开链接
+response = urllib.request.urlopen(url,data)
+#转为Unicode
+html=response.read().decode("utf-8")
+#json文件读取
+target = json.loads(html)
+#最终字典列表输出
+print(target["translateResult"][0][0]["tgt"])
 
-     a_file.close()
-     b_file.close()
-def splitfile(file_name):
-     f=open(file_name)
-     a=[]
-     b=[]
-     n=1
-     for file_each in f:
-          if file_each[:4] !="====":
-               (sex,speak)=file_each.split(":",1)
-               if sex=="a":
-                    a.append(speak)
-               elif sex=="b":
-                    b.append(speak)
-          else:
-               savefile(a,b,n)
-               a=[]
-               b=[]
-               n+=1
-     savefile(a, b, n)
-     f.close()
-
-splitfile("d://xx01.txt")
+# # 文件分割
+# def savefile(boy,gril,n):
+#      a_file_name="d://a"+str(n)+".txt"
+#      b_file_name = "d://b" + str(n) + ".txt"
+#      a_file=open(a_file_name,"w")
+#      b_file=open(b_file_name,"w")
+#      a_file.writelines(boy)
+#      b_file.writelines(gril)
+#
+#      a_file.close()
+#      b_file.close()
+# def splitfile(file_name):
+#      f=open(file_name)
+#      a=[]
+#      b=[]
+#      n=1
+#      for file_each in f:
+#           if file_each[:4] !="====":
+#                (sex,speak)=file_each.split(":",1)
+#                if sex=="a":
+#                     a.append(speak)
+#                elif sex=="b":
+#                     b.append(speak)
+#           else:
+#                savefile(a,b,n)
+#                a=[]
+#                b=[]
+#                n+=1
+#      savefile(a, b, n)
+#      f.close()
+#
+# splitfile("d://xx01.txt")
 
 
 # def hano(n,x,y,z):
