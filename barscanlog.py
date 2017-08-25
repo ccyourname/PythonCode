@@ -120,6 +120,7 @@ class barscan:
     def gui(self):
         self.scanwin = Tk()
         self.scanwin.title('条码扫描记录查询')
+        self.scanwin.wm_attributes("-topmost", 1)
         Label(self.scanwin,text='条码：').grid(row=0,column=0,sticky='W')
         Label(self.scanwin,text='VIN：').grid(row=1,column=0,sticky='W')
         #单元格 位置必须分离

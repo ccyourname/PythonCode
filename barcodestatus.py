@@ -42,6 +42,7 @@ class localbar:
         "TK¿ò¼Ü"
         self.master=Tk()
         self.master.title("ÌõÂë×´Ì¬²éÑ¯")
+        self.master.wm_attributes("-topmost", 1)
         Label(self.master,text="É¨ÃèÌõÂë£º").grid(row=0,column=0)
         self.e1=Entry(self.master)
         self.e1.grid(row=0,column=1)

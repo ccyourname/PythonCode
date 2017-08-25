@@ -13,6 +13,7 @@ class SendCode:
         "界面设置"
         self.sendwin=Tk()
         self.sendwin.title("换货后同时更换防错码")
+        self.sendwin.wm_attributes("-topmost", 1)
         Label(self.sendwin,text="原条码：").grid(row=0,column=0)
         Label(self.sendwin,text="新条码：").grid(row=1,column=0)
         self.e1=Entry(self.sendwin)

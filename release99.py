@@ -57,6 +57,7 @@ class releasebar:
     def gui(self):
         self.master = Tk()
         self.master.title('条码解绑v1')
+        self.master.wm_attributes("-topmost", 1)
         Label(self.master, text='条码').grid(row=0, column=0, sticky="nsew")
         Label(self.master, text='条码').grid(row=0, column=0, sticky="nsew")
         self.e1 = Listbox(self.master, width='36')

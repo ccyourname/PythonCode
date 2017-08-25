@@ -89,6 +89,7 @@ class StkPlan:
     def gui(self):
         self.master=Tk()
         self.master.title("安全库存设置")
+        self.master.wm_attributes("-topmost", 1)
         Label(self.master,text="零件号:",width=6).grid(row=0,column=0,padx=5,pady=5,sticky="W")
         self.e1=Entry(self.master,width="9")#零件号输入框
         self.e1.grid(row=0,column=1,padx=5,pady=5)
