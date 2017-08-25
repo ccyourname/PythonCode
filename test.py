@@ -2,35 +2,35 @@
 # #__author__ ="谢飞"
 # 网页链接
 import urllib.request
-import json
-import urllib.parse
-#Request URL
-url = "http://fanyi.youdao.com/translate?smartresult=dict&smartresult=rule&sessionFrom="
-data ={}
-i = input("请输入要翻译的文字：")
-# From Data 全部属性
-data["i"]=i
-data["from"]="AUTO"
-data["to"]="AUTO"
-data["smartresult"]="dict"
-data["client"]="fanyideskweb"
-data["salt"]="502865709143"
-data["sign"]="e7b725d55dd02ab7b3a17c44170950ad"
-data["doctype"]="json"
-data["version"]="2.1"
-data["keyfrom"]="fanyi.web"
-data["action"]="FY_BY_CLlCKBUTTON"
-data["typoResult"]="true"
-#转码
-data =urllib.parse.urlencode(data).encode("utf-8")
-#打开链接
-response = urllib.request.urlopen(url,data)
-#转为Unicode
-html=response.read().decode("utf-8")
-#json文件读取
-target = json.loads(html)
-#最终字典列表输出
-print(target["translateResult"][0][0]["tgt"])
+# import json
+# import urllib.parse
+# #Request URL
+# url = "http://fanyi.youdao.com/translate?smartresult=dict&smartresult=rule&sessionFrom="
+# data ={}
+# i = input("请输入要翻译的文字：")
+# # From Data 全部属性
+# data["i"]=i
+# data["from"]="AUTO"
+# data["to"]="AUTO"
+# data["smartresult"]="dict"
+# data["client"]="fanyideskweb"
+# data["salt"]="502865709143"
+# data["sign"]="e7b725d55dd02ab7b3a17c44170950ad"
+# data["doctype"]="json"
+# data["version"]="2.1"
+# data["keyfrom"]="fanyi.web"
+# data["action"]="FY_BY_CLlCKBUTTON"
+# data["typoResult"]="true"
+# #转码
+# data =urllib.parse.urlencode(data).encode("utf-8")
+# #打开链接
+# response = urllib.request.urlopen(url,data)
+# #转为Unicode
+# html=response.read().decode("utf-8")
+# #json文件读取
+# target = json.loads(html)
+# #最终字典列表输出
+# print(target["translateResult"][0][0]["tgt"])
 
 # # 文件分割
 # def savefile(boy,gril,n):
@@ -148,3 +148,37 @@ print(target["translateResult"][0][0]["tgt"])
 # e1.focus_set()
 # tk.mainloop()
 #
+
+import urllib.request
+import re
+
+# 打开网址（1）
+def open_url(url):
+    req = urllib.request.Request(url)
+    req.add_header('User-Agent','Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.221 Safari/537.36')
+    response = urllib.request.urlopen(req)
+    html = response.read().decode('utf-8')
+
+    return html
+
+# 获取图片网址(2)
+def get_img(html):
+    p = r'<img class="BDE_Image" src="([^"]+\.jpg)"' #正则表达式
+    imglist = re.findall(p,html)
+    filename = 1
+    for each in imglist:
+        print(each)
+
+        # filename = each.split('/')[-1]
+        try:
+            urllib.request.urlretrieve(each,str(filename)+'.jpg',None)#保存链接
+            # urllib.request.urlretrieve(each,filename,None)
+        except:
+            print("保存失败")
+        filename+=1
+
+# 调用函数（3）
+if __name__ == '__main__':
+    url = "https://tieba.baidu.com/p/5283758736"
+    get_img(open_url(url))
+

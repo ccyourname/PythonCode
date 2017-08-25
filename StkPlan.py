@@ -3,10 +3,12 @@
 from tkinter import *
 import tkinter.messagebox as mes
 import dbcfg
+import decimal
+import time
 
 class StkPlan:
     def click_search(self):
-        self.pno = self.e1.get()
+        self.pno = self.e1.get()[:8]
         self.e1.delete(0,END)
         # self.stkname.delete(0, END)
         # self.partno.delete(0, END)
@@ -32,7 +34,7 @@ class StkPlan:
         try:
             dbcfg.cursor1.execute(sql_max)
             dbcfg.conn1.commit()
-            self.ok=mes.showinfo('','修改成功！')
+            self.ok=mes.showinfo('',"最高库存修改为:"+str(self.maxqty.get()))
             # if self.ok=='ok':
             #     self.e1.focus_set()
         except:
@@ -43,11 +45,39 @@ class StkPlan:
         try:
             dbcfg.cursor1.execute(sql_safy)
             dbcfg.conn1.commit()
-            self.ok=mes.showinfo('','修改成功！')
+            self.ok=mes.showinfo('',"安全库存修改为:"+str(self.safeqty.get()))
         except:
             print("更新安全库存失败！")
     def click(self,event):
         self.click_search()
+    def click_add(self):
+        sql_add="INSERT INTO dbo.WMS_StkPlanCfg( StkCode ,PartNo ,PartVersion ,MaxQty ,MinQty ,SaftyQty ," \
+                "ReOrderPoint ,PullBatch ,CreateUserAccount ,CreateMachine ,CreateTime , " \
+                "LatestModifyUserAccount ,LatestModifyTime , LatestModifyMachine) " \
+                "VALUES  ( ?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+        ctime=time.strftime("%Y-%m-%d %H:%M:%S",time.localtime())
+        m=self.maxqty.get()
+        s=self.safeqty.get()
+        if m =='':
+            m=0
+        if s =='':
+            s=0
+        agrms=['11402300',self.e1.get()[:8],'NORMAL',m,0,s,0,0,'CSDIY','CSDIY',ctime,'CSDIY',ctime,'CSDIY']
+
+        sql_list=("SELECT PartNo FROM  dbo.MFG_PartDetail WHERE PartNo='%s'" % self.e1.get()[:8])
+        dbcfg.cursor1.execute(sql_list)
+        i=len(dbcfg.cursor1.fetchall())
+        if i==0:
+            mes.showinfo('', "零件号不存在！")
+        else:
+            try:
+                dbcfg.cursor1.execute(sql_add,agrms)
+                dbcfg.conn1.commit()
+                mes.showinfo('', "零件号："+self.e1.get()[:8]+"\n最高库存："+str(m)+"\n安全库存："+str(s)+"\n新增成功！")
+            except:
+                mes.showinfo('', "更新失败")
+
+
     # def click_pushbtn(self):
     #     self.twin=Tk()
     #     self.twin.title("安全库存修改")
@@ -73,6 +103,8 @@ class StkPlan:
         self.change_max.grid(row=2,column=2,padx=5,pady=5)
         self.change_safy=Button(self.master,text="修改下限",bg="blue",command=self.click_safy)
         self.change_safy.grid(row=3,column=2,padx=5,pady=5)
+        self.change_safy=Button(self.master,text="新增",bg="RED",command=self.click_add)
+        self.change_safy.grid(row=4,column=1,padx=5,pady=5)
         # self.stkname=Listbox(self.master,width=10,height=2)
         # self.stkname.grid(row=2,column=0)
         # self.partno=Listbox(self.master,width="9",height=2)
