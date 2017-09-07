@@ -1,4 +1,4 @@
-import urllib.request 
+import urllib.request
 import json
 import urllib.parse
 while 1:
