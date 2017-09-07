@@ -128,7 +128,7 @@ class barscan:
         self.scanwin.e1.grid(row=0,column=1,sticky='W')
         self.scanwin.evin=Entry(self.scanwin,width=18)
         self.scanwin.evin.grid(row=1,column=1,sticky='W')
-        self.scanwin.e2=Listbox(self.scanwin,width=120,height=30)
+        self.scanwin.e2=Listbox(self.scanwin,width=140,height=30)
         self.scanwin.e2.grid(row=2,column=0,columnspan=9,sticky='W')
         self.scanwin.btn1 = Button(self.scanwin,text='Ãı¬Î≤È—Ø',command=self.checklog).grid(row=0,column=3,sticky='W')
         self.scanwin.btn2 = Button(self.scanwin,text='VIN≤È—Ø',command=self.checkvin).grid(row=1,column=3,sticky='W')
