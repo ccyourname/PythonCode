@@ -184,26 +184,26 @@
 #     get_img(open_url(url))
 #
 
-# class MyQueue:
-#     def __init__(self):
-#         self.stack_1 = []
-#         self.stack_2 = []
-#     def push(self, element):
-#         while self.stack_1:
-#             self.stack_2.append(self.stack_1.pop())
-#         self.stack_1.append(element)
-#         while self.stack_2:
-#             self.stack_1.append(self.stack_2.pop())
-#     def top(self):
-#         if self.stack_1:
-#             return self.stack_1[-1]
-#     def pop(self):
-#         return self.stack_1.pop()
-# queue = MyQueue()
-# queue.push(9)
-# print(queue.pop())
-# queue.push(8)
-# print(queue.top())
-# queue.push(3)
-# print(queue.pop())
+class MyQueue:
+    def __init__(self):
+        self.stack_1 = []
+        self.stack_2 = []
+    def push(self, element):
+        while self.stack_1:
+            self.stack_2.append(self.stack_1.pop())
+        self.stack_1.append(element)
+        while self.stack_2:
+            self.stack_1.append(self.stack_2.pop())
+    def top(self):
+        if self.stack_1:
+            return self.stack_1[-1]
+    def pop(self):
+        return self.stack_1.pop()
+queue = MyQueue()
+queue.push(9)
+print(queue.pop())
+queue.push(8)
+print(queue.top())
+queue.push(3)
+print(queue.pop())
 

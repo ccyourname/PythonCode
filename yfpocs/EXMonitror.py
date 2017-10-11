@@ -78,7 +78,7 @@ class EX_Monitor:
                     self.master.e1.insert(END, 'COGI')
         except:
             print("cogi_sql Ö´ĞĞ´íÎó")
-        self.master.e1.update()
+        update = self.master.e1.update()
         self.master.l1.update()
         self.master.l2.update()
         self.master.l3.update()
