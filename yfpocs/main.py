@@ -8,6 +8,7 @@ import barscanlog
 import release99
 import barcodestatus
 import StkPlan
+import SrchStdOrdMstr
 if __name__=="__main__":
     # main=main()
     root=Tk()
@@ -18,6 +19,7 @@ if __name__=="__main__":
     x2y2=release99.releasebar()
     x3y1=errorcode.LED()
     x4y1=StkPlan.StkPlan()
+    x4y2=SrchStdOrdMstr.SStdOrdMstr()
     root.x1y1 = Button(root,text='条码报废查询',command=x1y1.gui)
     root.x1y1.grid(row=0, column=0,padx=10,pady=10)
     root.x1y2 = Button(root,text='全局条码查询',command=x1y2.gui)
@@ -32,6 +34,8 @@ if __name__=="__main__":
     root.x3y2.grid(row=3, column=2,padx=10,pady=10)
     root.x4y1 = Button(root,text='安全库存调整', width=10,command=x4y1.gui)
     root.x4y1.grid(row=4, column=0,padx=10,pady=10)
+    root.x4y2 = Button(root,text='条码配置查询', width=10,command=x4y2.gui)
+    root.x4y2.grid(row=4, column=2,padx=10,pady=10)
     # bt1=serchbarlog.show()
     root.mainloop()
     # '''关闭数据库接口'''

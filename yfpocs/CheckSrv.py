@@ -12,8 +12,9 @@ import win32serviceutil
 CONFIGFILE = 'config.ini'
 config = ConfigParser()
 config.read(CONFIGFILE)
-ProgramPath = config.get('MonitorProgramPath', 'ProgramPath')
-ProcessName = config.get('MonitorProcessName', 'ProcessName')
+# ProgramPath = config.get('MonitorProgramPath', 'ProgramPath')
+# ProcessName = config.get('MonitorProcessName', 'ProcessName')
+ServiceName = config.get('MonitorServiceName','ServiceName')
 # 读取配置文件中的进程名和系统路径，这2个参数都可以在配置文件中修改
 # ProList = []
 # 定义一个列表
@@ -28,20 +29,34 @@ class CheckSrv:
     # def __init__(self):
     #     self.scm=win32service.OpenSCManager(None,None,win32service.SC_MANAGER_ALL_ACCESS)
     def main(self):
-        poc = psutil.process_iter()
-        for process in poc:
-            ProList.append(str(process.name()))
-            # print(ProList)
-        # 把所有任务管理器中的进程名添加到列表
+        # poc = psutil.process_iter()
+        # 服务状态
+        # UNKNOWN = 0
+        # STOPPED = 1
+        # START_PENDING = 2
+        # STOP_PENDING = 3
+        # RUNNING = 4
+        # 检查服务的状态
+        result = win32serviceutil.QueryServiceStatus(ServiceName)[1]
 
-        if ProcessName in ProList:
-         # 判断进程名是否在列表中，如果是True，则所监控的服务正在 运行状态，
-            # 打印服务正常运行
-            # print("服务正常运行中...")
-            pass
+        # for process in poc:
+        #
+        #     ProList.append(str(process.name()))
+        #     # print(ProList)
+        # # 把所有任务管理器中的进程名添加到列表
+
+        # if ProcessName in ProList:
+        #  # 判断进程名是否在列表中，如果是True，则所监控的服务正在 运行状态，
+        #     # 打印服务正常运行
+        #     # print("服务正常运行中...")
+        #     pass
+        # 判断当前服务处于什么状态
+        if result == 4 or result == 2:
+            #打印服务正常运行
+            print("服务正常运行中...")
 
         else:
-            # 如果进程名不在列表中，即监控的服务挂了，则在log文件下记录日志
+            # 如果服务状态不是已启动或正在启动，即监控的服务挂了，则在log文件下记录日志
             # 日志文件名是以年月日为文件名
 
             # f = open('.\\log\\' + time.strftime("%Y%m%d", time.localtime()) + '-exception.txt', 'w')
@@ -54,8 +69,8 @@ class CheckSrv:
             try:
                 print("试图重启")
                 # os.startfile(ProgramPath) #启动服务
-                win32serviceutil.StartService('YFPO.MES.iHnadUpdateServer')
-                # win32serviceutil.StartService('cphs')
+                # win32serviceutil.StartService('YFPO.MES.iHnadUpdateServer')
+                win32serviceutil.StartService('cphs')#启动服务
                 print("重启成功")
                 print("服务正常工作中...")
                 # 调用服务重启
@@ -81,5 +96,5 @@ if __name__ == "__main__":
     c=CheckSrv()
     while True:
         c.main()
-        time.sleep(60)
+        time.sleep(10)
         # 每隔10秒调用脚本看下服务是否正常，如果不正常则重启服务，如果正常，则打印服务正常

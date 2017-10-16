@@ -17,3 +17,13 @@ cursor3 = conn3.cursor()
 conn4 = pyodbc.connect(r'DRIVER={SQL Server};SERVER=10.226.35.103;DATABASE=DevComm;UID=device_user;PWD=yfpodevice_user')
 #增加数据库游标
 cursor4 = conn4.cursor()
+
+if __name__=='__main__':
+    cursor1.close()
+    cursor2.close()
+    cursor3.close()
+    cursor4.close()
+    conn1.close()
+    conn2.close()
+    conn3.close()
+    conn4.close()
