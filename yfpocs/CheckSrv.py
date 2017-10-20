@@ -28,6 +28,9 @@ ProList = []
 class CheckSrv:
     # def __init__(self):
     #     self.scm=win32service.OpenSCManager(None,None,win32service.SC_MANAGER_ALL_ACCESS)
+    _svc_name_ ="CheckISvc"#服务名
+    _svc_display_name_="Check Ihand Service" #服务在windows系统中显示的名称
+    _svc_description_="这个服务用于监控Ihand update服务是否正常启动"#服务的描述
     def main(self):
         # poc = psutil.process_iter()
         # 服务状态

@@ -47,12 +47,21 @@ e2.grid(row=1,column=2)
 e3.grid(row=1,column=0)
 #e4.grid(row=1,column=3)
 def insert(): #插入表
-     cursor.execute("SELECT id ,CustOrderNo ,SeqOrderNo ,PartNo ,StdOrdCfg ,CustPartNo ,ProduceCategory , Category3 ,PartFamily ,IsCCR , IsManual ,VinCode ,SerialNo ,CustCode , BarCode ,JisOrderDetId ,Status ,Finished , CreateTime FROM  dbo.LGS_PreAssembly WHERE id >='179631' AND PartFamily = 'L550CRB' AND Status = '1' AND Finished = '1' AND id NOT IN (SELECT PreAssemblyID FROM  dbo.LGS_DispPreAssembly )")
+     cursor.execute("SELECT id ,CustOrderNo ,SeqOrderNo ,PartNo ,StdOrdCfg ,CustPartNo ,"
+                    "ProduceCategory , Category3 ,PartFamily ,IsCCR , IsManual ,VinCode ,"
+                    "SerialNo ,CustCode , BarCode ,JisOrderDetId ,Status ,Finished , "
+                    "CreateTime FROM  dbo.LGS_PreAssembly WHERE id >='179631' AND "
+                    "PartFamily = 'L550CRB' AND Status = '1' AND Finished = '1' AND"
+                    " id NOT IN (SELECT PreAssemblyID FROM  dbo.LGS_DispPreAssembly )")
      getdate = cursor.fetchall()
      for cc in getdate:
           #Pyodbc数据插入
-          sql=("INSERT INTO dbo.LGS_DispPreAssembly( CustOrderNo ,SeqOrderNo ,PartNo ,StdOrdCfg ,CustPartNo ,ProduceCategory , Category3 ,PartFamily ,IsCCR , IsManual ,VinCode ,SerialNo ,CustCode , BarCode ,JisOrderDetId ,Status ,Finished ,CreateTime ,PreAssemblyID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)" )
-          parama=(cc[1],cc[2],cc[3],cc[4],cc[5],cc[6],cc[7],cc[8],cc[9],cc[10],cc[11],cc[12],cc[13],cc[14],cc[15],0,0,cc[18],cc[0])
+          sql=("INSERT INTO dbo.LGS_DispPreAssembly( CustOrderNo ,SeqOrderNo ,PartNo ,StdOrdCfg ,CustPartNo"
+               " ,ProduceCategory , Category3 ,PartFamily ,IsCCR , IsManual ,VinCode ,SerialNo ,CustCode , "
+               "BarCode ,JisOrderDetId ,Status ,Finished ,CreateTime ,PreAssemblyID) "
+               "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)" )
+          parama=(cc[1],cc[2],cc[3],cc[4],cc[5],cc[6],cc[7],cc[8],cc[9],cc[10],cc[11],cc[12],cc[13],cc[14],
+                  cc[15],0,0,cc[18],cc[0])
           cursor.execute(sql,parama)
           #提交修改
           conn.commit()          

@@ -1,5 +1,5 @@
 #coding=gbk
-#__author__ ="谢飞" 
+#__author__ ="Charles.Xie"
 import  pyodbc
 #链接数据库 常熟正式库3.0
 conn1 = pyodbc.connect(r'DRIVER={SQL Server};SERVER=10.226.35.103;DATABASE=IMES3;UID=imes3_user;PWD=yfpoimes31024')
@@ -17,6 +17,8 @@ cursor3 = conn3.cursor()
 conn4 = pyodbc.connect(r'DRIVER={SQL Server};SERVER=10.226.35.103;DATABASE=DevComm;UID=device_user;PWD=yfpodevice_user')
 #增加数据库游标
 cursor4 = conn4.cursor()
+
+
 
 if __name__=='__main__':
     cursor1.close()

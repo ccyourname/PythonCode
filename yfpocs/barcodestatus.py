@@ -5,7 +5,6 @@ from tkinter import *
 class localbar:
     def scanlog(self,event):
         "producebarcode≤È—Ø"
-
         bar=self.e1.get()
         self.e1.delete(0,END)
         self.e2.delete(0,END)
