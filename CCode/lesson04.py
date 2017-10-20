@@ -56,6 +56,7 @@ class SCS: #新建一个类
         else:
             self.master.txt.insert(END,"学员信息不存在！请重新扫描！")
 
+
     # 函数，用来控制GUI界面
     def gui(self):
         #GUI界面部署
@@ -70,6 +71,9 @@ class SCS: #新建一个类
         #输入框，位置是第0行第1列，宽度是15个字符
         self.master.e1=Entry(self.master,width="15")
         self.master.e1.grid(row=0,column=1)
+        # #增加个按钮，用于输入学生信息
+        # self.master.e2=Button(self.master,text='新增',command=self.modify)
+        # self.master.e2.grid(row=0,column=2)
         #输出框，位置是第1行第0列，横跨3列，靠西W排列
         self.master.txt=Listbox(self.master,width=40,)
         self.master.txt.grid(row=1,column=0,columnspan=3,sticky='W')
