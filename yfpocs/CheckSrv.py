@@ -24,13 +24,13 @@ ServiceName = config.get('MonitorServiceName','ServiceName')
 # # poc = wmi.ExecQuery('select * form Win32.Process')
 # poc= wmi.InstancesOf('Win32.Process')
 # p=psutil.Process()
-ProList = []
+# ProList = []
 class CheckSrv:
     # def __init__(self):
     #     self.scm=win32service.OpenSCManager(None,None,win32service.SC_MANAGER_ALL_ACCESS)
-    _svc_name_ ="CheckISvc"#服务名
-    _svc_display_name_="Check Ihand Service" #服务在windows系统中显示的名称
-    _svc_description_="这个服务用于监控Ihand update服务是否正常启动"#服务的描述
+    # _svc_name_ ="CheckISvc"#服务名
+    # _svc_display_name_="Check Ihand Service" #服务在windows系统中显示的名称
+    # _svc_description_="这个服务用于监控Ihand update服务是否正常启动"#服务的描述
     def main(self):
         # poc = psutil.process_iter()
         # 服务状态
@@ -41,7 +41,7 @@ class CheckSrv:
         # RUNNING = 4
         # 检查服务的状态
         result = win32serviceutil.QueryServiceStatus(ServiceName)[1]
-
+        #检测服务当前状态
         # for process in poc:
         #
         #     ProList.append(str(process.name()))
@@ -72,8 +72,8 @@ class CheckSrv:
             try:
                 print("试图重启")
                 # os.startfile(ProgramPath) #启动服务
-                # win32serviceutil.StartService('YFPO.MES.iHnadUpdateServer')
-                win32serviceutil.StartService('cphs')#启动服务
+                
+                win32serviceutil.StartService(ServiceName)#启动服务
                 print("重启成功")
                 print("服务正常工作中...")
                 # 调用服务重启
@@ -90,14 +90,11 @@ class CheckSrv:
         # 关闭文件
         # print('Restart Server Success...')
         # print(time.strftime('%Y-%m-%d %H:%M:%S --%A--%c', time.localtime()))
-        del ProList[:]
-
-
-# 清空列表，否则列表会不停的添加进程名，会占用系统资源
+        # del ProList[:]
 
 if __name__ == "__main__":
     c=CheckSrv()
     while True:
         c.main()
-        time.sleep(10)
-        # 每隔10秒调用脚本看下服务是否正常，如果不正常则重启服务，如果正常，则打印服务正常
+        time.sleep(60)
+        # 每隔60秒调用脚本看下服务是否正常，如果不正常则重启服务，如果正常，则打印服务正常
